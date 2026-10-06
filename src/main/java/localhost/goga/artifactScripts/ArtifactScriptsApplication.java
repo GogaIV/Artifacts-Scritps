@@ -1,9 +1,9 @@
 package localhost.goga.artifactScripts;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import java.util.Optional;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import io.github.cdimascio.dotenv.Dotenv;
 
 @SpringBootApplication
 public class ArtifactScriptsApplication {
@@ -19,11 +19,16 @@ public class ArtifactScriptsApplication {
   }
 
   private static class Session {
+
     private Dotenv dotenv = Dotenv.load();
 
     private String artifactsApi = Optional.ofNullable(
       dotenv.get("ARTIFACTS_API_KEY")
-    ).orElse("ninja");
+    ).orElseThrow(() ->
+      new IllegalStateException(
+        "api key not found, cant access .env or api key missing"
+      )
+    );
 
     public Session() {}
 
