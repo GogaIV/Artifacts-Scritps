@@ -1,9 +1,9 @@
 package localhost.goga.artifactScripts;
 
-import io.github.cdimascio.dotenv.Dotenv;
-import java.util.Optional;
+import java.util.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import io.github.cdimascio.dotenv.Dotenv;
 
 @SpringBootApplication
 public class ArtifactScriptsApplication {
@@ -12,6 +12,7 @@ public class ArtifactScriptsApplication {
     SpringApplication.run(ArtifactScriptsApplication.class, args);
     Session session = new Session();
     session.getApi();
+    session.requestUserData();
   }
 
   public static void hello() {
@@ -34,6 +35,13 @@ public class ArtifactScriptsApplication {
 
     public void getApi() {
       System.out.println("API KEY = " + artifactsApi);
+    }
+
+    public void requestUserData(){
+      Scanner scanner = new Scanner(System.in);
+      System.out.println("Hello, say hi back");
+      String hello = scanner.nextLine();
+      scanner.close();
     }
   }
 }
